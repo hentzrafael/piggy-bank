@@ -18,12 +18,10 @@ export default function LoginPage() {
       );
       const {statusCode, message} = await res.json();
       if(statusCode === 200){
-        router.push("/home?username="+username,"/home");
-
+        router.replace("/home?username="+username);
       }else{
         alert(message);
       }
-      
     } catch (err) {
       console.log(err);
     }

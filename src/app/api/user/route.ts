@@ -1,8 +1,20 @@
 import { prisma } from "@/common/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-    return Response.json(await prisma.user.findMany());
+export async function GET(req:NextRequest) {
+    const username = req.nextUrl.searchParams.get("username");
+    if (!username) {
+        return NextResponse.json({
+            statusCode: 404,
+            message: "Usuário não encontrado",
+        })
+    }
+    return Response.json(await prisma.user.findUnique({
+        where: {
+            username
+        }
+    }));
+
 }
 
 export async function POST(req: NextRequest) {
