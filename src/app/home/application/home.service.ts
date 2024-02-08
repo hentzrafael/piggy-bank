@@ -34,3 +34,10 @@ export const transferBetweenAccounts = async (originId: string, destinationId: s
         body: JSON.stringify({ originId, destinationId, amount }),
     });
 }
+
+export const createSavingsAndCheckingsAccounts = async (username:string, name: string, initialBalance: number) => {
+    const res = await fetch(`${API_URL}/api/accounts`, {
+        method: 'POST',
+        body: JSON.stringify({ name, balance:initialBalance, username}),
+    });
+}
