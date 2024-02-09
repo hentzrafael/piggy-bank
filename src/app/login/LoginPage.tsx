@@ -60,9 +60,9 @@ export default function LoginPage() {
           style={{ color: 'black' }}
         />
         <button
-        style={{ backgroundColor: '#6C63FF' }}
+        style={{ backgroundColor: "#6C63FF" }}
         className="w-full p-4 text-white rounded-md" onClick={login}>Login</button>
-        <span className="text-gray-500 w-2/4 flex mt-2">Don't have an account?<a href="/register" className="text-blue-500">Register</a></span>
+        <span className="text-gray-500 w-2/4 flex mt-2">Don&apos;t have an account?<a href="/register" className="text-blue-500">Register</a></span>
       </div>
     </div>
     </div>
