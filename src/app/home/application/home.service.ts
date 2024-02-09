@@ -33,6 +33,7 @@ export const transferBetweenAccounts = async (originId: string, destinationId: s
         method: 'POST',
         body: JSON.stringify({ originId, destinationId, amount }),
     });
+    return await res.json();
 }
 
 export const createSavingsAndCheckingsAccounts = async (username:string, name: string, initialBalance: number) => {

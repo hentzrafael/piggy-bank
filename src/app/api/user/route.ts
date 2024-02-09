@@ -25,29 +25,23 @@ export async function POST(req: NextRequest) {
                 username
             }
         });
-        if(!user){
-            return NextResponse.json({
-                statusCode: 404,
-                message: "Usuário não encontrado",
-            })
-        }
 
-        if(user.password !== password){
+        if(!user || user.password !== password){
             return NextResponse.json({
                 statusCode: 401,
-                message: "Senha inválida",
+                message: "Invalid password and/or username",
             })
         }
 
         return NextResponse.json({
             statusCode: 200,
-            message: "Login realizado com sucesso",
+            message: "Login successful",
             user: user
         })
     }catch (err){
         return NextResponse.json({
             statusCode: 500,
-            message: "Erro ao realizar login",
+            message: "Unknown error, try again later",
         });
     }
     

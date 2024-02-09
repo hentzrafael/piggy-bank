@@ -2,6 +2,7 @@ import { fetchAllAcounts, transferBetweenAccounts } from "@/app/home/application
 import { Account } from "@/app/home/domain/account";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export function TransferModal({ onClose, username }: { onClose: (value: number) => void, username: string }) {
     const router = useRouter();
@@ -25,22 +26,30 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
     };
 
     const handleModalClose = async () => {
-        console.log(origin, destination, value);
         if (value) {
             if (origin === destination) {
-                alert('Origin and destination must be different');
+                toast.info('Origin and destination must be different');
             } else {
-                await transferBetweenAccounts(origin, destination, value);
-                router.reload()
+                const { statusCode, message } = await transferBetweenAccounts(origin, destination, value);
+                if (statusCode === 200) {
+                    toast.success(message);
+                } else {
+                    toast.error(message);
+                }
+                setTimeout(() => {
+                    router.reload()
+                }, 1000)
             }
+        }else{
+            toast.info('Amount must be greater than 0');
         }
         onClose(value);
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 mt-15">
             <div className="bg-white p-8 rounded-lg">
-                <h1 className="text-lg font-bold mb-4 text-black">Enter the amount to transfer</h1>
+                <h1 className="text-lg font-bold mb-4 text-black">Amount to transfer:</h1>
                 <input
                     type="number"
                     value={value}
@@ -48,7 +57,7 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
                     className="w-full border-gray-300 rounded-lg p-2 mb-4"
                     style={{ color: 'black' }}
                 />
-                <h1 className="text-lg font-bold mb-4 text-black">Enter the origin account</h1>
+                <h1 className="text-lg font-bold mb-4 text-black">Origin:</h1>
                 <select className="w-full border-gray-300 rounded-lg p-2 mb-4 text-black" value={origin} onChange={(e) => setOrigin(e.target.value)}>
                     {options.map((option, index) => (
                         <option key={index} value={option.id} onClick={() => setOrigin(option.id)}>
@@ -56,7 +65,7 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
                         </option>
                     ))}
                 </select>
-                <h1 className="text-lg font-bold mb-4 text-black">Enter the destination account</h1>
+                <h1 className="text-lg font-bold mb-4 text-black">Destination:</h1>
                 <select className="w-full border-gray-300 rounded-lg p-2 mb-4 text-black" value={destination} onChange={(e) => setDestination(e.target.value)}>
                     {options.map((option, index) => (
                         <option key={index} value={option.id}>
@@ -64,16 +73,19 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
                         </option>
                     ))}
                 </select>
-                <button
-                    onClick={() => onClose(0)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                    Cancel
-                </button>
-                <button
-                    onClick={handleModalClose}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                    OK
-                </button>
+                <hr />
+                <div className="flex justify-between mt-4">
+                    <button
+                        onClick={() => onClose(0)}
+                        className="bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-500">
+                        Cancel
+                    </button>
+                    <button
+                        onClick={handleModalClose}
+                        className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary">
+                        OK
+                    </button>
+                </div>
             </div>
         </div>
     );

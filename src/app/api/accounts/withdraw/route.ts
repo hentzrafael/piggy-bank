@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        return NextResponse.json({ statuscode: 200, data: account });
+        return NextResponse.json({ statusCode: 200, data: account , message: "Withdrew successfully"});
         
     } catch (err) {
         return NextResponse.json({

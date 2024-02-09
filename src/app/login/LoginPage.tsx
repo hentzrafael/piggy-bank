@@ -1,5 +1,8 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { ToastContainer,toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,9 +21,9 @@ export default function LoginPage() {
       );
       const {statusCode, message} = await res.json();
       if(statusCode === 200){
-        router.replace("/home?username="+username);
+        router.push("/home?username="+username);
       }else{
-        alert(message);
+        toast.error(message);
       }
     } catch (err) {
       console.log(err);
@@ -35,12 +38,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="w-1/3">
+    <div className="flex flex-col items-center h-screen justify-center">
+      <Image src={"savings.svg"} alt={"Person riding a piggy bank"} width={300} height={300} className="sm:w-2/4 md:w-2/5 lg:w-4/12 flex"/>
+    <div>
+      <ToastContainer/>
+      <div className="p-4">
         <input
           type="text"
           placeholder="Enter your username"
-          className="w-full p-4 border-2 border-gray-300 rounded-md"
+          className="w-full p-4 border-2 border-gray-300 rounded-md mt-2 mb-2"
           value={username}
           onChange={handleUsernameChange}
           style={{ color: 'black' }}
@@ -48,13 +54,17 @@ export default function LoginPage() {
         <input
           type="password"
           placeholder="Enter your password"
-          className="w-full p-4 border-2 border-gray-300 rounded-md"
+          className="w-full p-4 border-2 border-gray-300 rounded-md mt-2 mb-2"
           value={password}
           onChange={handlePasswordChange}
           style={{ color: 'black' }}
         />
-        <button className="w-full p-4 bg-blue-500 text-white rounded-md" onClick={login}>Login</button>
+        <button
+        style={{ backgroundColor: '#6C63FF' }}
+        className="w-full p-4 text-white rounded-md" onClick={login}>Login</button>
+        <span className="text-gray-500 w-2/4 flex mt-2">Don't have an account?<a href="/register" className="text-blue-500">Register</a></span>
       </div>
+    </div>
     </div>
   );
 }
