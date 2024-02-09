@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const { originId, destinationId, amount } = await req.json();
-        console.log(originId, destinationId, amount);
         const origin = await prisma.account.update({
             where: {
                 id: originId
@@ -41,7 +40,7 @@ export async function POST(req: NextRequest) {
             })
         }
         
-        return NextResponse.json({ statuscode: 200, data: {destination, origin} });
+        return NextResponse.json({ statusCode: 200, data: {destination, origin}, message: "Transferred successfully" });
         
     } catch (err) {
         return NextResponse.json({

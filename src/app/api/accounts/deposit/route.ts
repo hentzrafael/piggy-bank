@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const {accountId, amount } = await req.json();
-        console.log(accountId, amount);
         const account = await prisma.account.update({
             where: {
                 id: accountId
@@ -23,7 +22,7 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        return NextResponse.json({ statuscode: 200, data: account });
+        return NextResponse.json({ statusCode: 200, data: account, message: "Deposited successfully" });
         
     } catch (err) {
         return NextResponse.json({
