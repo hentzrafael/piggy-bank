@@ -19,7 +19,7 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
             setDestination(accounts[1].id);
         };
         loadOptions();
-    });
+    },[username]);
 
     const handleInputChange = (e: any) => {
         setValue(parseFloat(e.target.value));
