@@ -1,5 +1,11 @@
 import {PrismaClient} from '@prisma/client';
 
- export const prisma = new PrismaClient({
-    log: ['query']
+ const prisma = new PrismaClient({
+   datasources: {
+      db:{
+         url: process.env.NODE_ENV === 'test' ? "file:./test/db.sqlite" : process.env.DATABASE_URL,
+      }
+   }
  });
+
+ export default prisma;

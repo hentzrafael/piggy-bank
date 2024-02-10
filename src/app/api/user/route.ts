@@ -1,7 +1,7 @@
-import { prisma } from "@/common/prisma";
+import  prisma  from "@/common/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req:NextRequest) {
+export async function GET(req:NextRequest, res:NextResponse) {
     const username = req.nextUrl.searchParams.get("username");
     if (!username) {
         return NextResponse.json({
@@ -17,7 +17,7 @@ export async function GET(req:NextRequest) {
 
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
     const {username, password} = await req.json();
     try {   
         const user = await prisma.user.findUnique({

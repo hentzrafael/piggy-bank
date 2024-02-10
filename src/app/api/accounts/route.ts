@@ -1,13 +1,13 @@
-import { prisma } from "@/common/prisma";
+import prisma from "@/common/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
     try {
         const username = req.nextUrl.searchParams.get("username");
         if (!username) {
             return NextResponse.json({
                 statusCode: 404,
-                message: "Usuário não encontrado",
+                message: "User not found",
             })
         }
         const accounts = await prisma.user.findUnique({
@@ -18,16 +18,16 @@ export async function GET(req: NextRequest) {
                 accounts: true
             }
         });
-        return NextResponse.json({ statuscode: 200, data: accounts });
+        return NextResponse.json({ statusCode: 200, data: accounts });
     } catch (err) {
         return NextResponse.json({
             statusCode: 500,
-            message: "Erro ao buscar contas",
+            message: "Error retrieving accounts",
         })
     }
 };
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const { username, balance, name } = await req.json();
         const user = await prisma.user.findUnique({
@@ -35,11 +35,10 @@ export async function POST(req: NextRequest) {
                 username
             }
         });
-
         if (!user) {
             return NextResponse.json({
                 statusCode: 404,
-                message: "Usuário não encontrado",
+                message: "User not found",
             })
         }
 
@@ -51,12 +50,12 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        return NextResponse.json({ statuscode: 200, data: account });
+        return NextResponse.json({ statusCode: 200, data: account });
         
     } catch (err) {
         return NextResponse.json({
             statusCode: 500,
-            message: "Erro ao criar contas",
+            message: "Error creating accounts",
         })
     }
 };
