@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { ToastContainer,toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { makeLogin } from "../../application/login.service";
+import { LoginInput } from "../components/LoginInput/LoginInput";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,15 +13,7 @@ export default function LoginPage() {
 
   const login = async () => {
     try {
-      const res = await fetch('/api/user', {
-        method: 'POST',
-        body: JSON.stringify({
-          "username": username,
-          "password": password
-        })
-      },
-      );
-      const {statusCode, message} = await res.json();
+      const {statusCode, message} = await makeLogin(username, password);
       if(statusCode === 200){
         router.push("/home?username="+username);
       }else{
@@ -28,7 +22,6 @@ export default function LoginPage() {
     } catch (err) {
       console.log(err);
     }
-
   }
   const handleUsernameChange = (event: any) => {
     setUsername(event.target.value)
@@ -43,26 +36,20 @@ export default function LoginPage() {
     <div>
       <ToastContainer/>
       <div className="p-4">
-        <input
-          type="text"
-          placeholder="Enter your username"
-          className="w-full p-4 border-2 border-gray-300 rounded-md mt-2 mb-2"
-          value={username}
-          onChange={handleUsernameChange}
-          style={{ color: 'black' }}
-        />
-        <input
-          type="password"
-          placeholder="Enter your password"
-          className="w-full p-4 border-2 border-gray-300 rounded-md mt-2 mb-2"
-          value={password}
-          onChange={handlePasswordChange}
-          style={{ color: 'black' }}
-        />
+        <LoginInput 
+        onChange={handleUsernameChange}
+        value={username}
+        type="text" 
+        placeholder="Enter your username"/>
+        <LoginInput
+        onChange={handlePasswordChange}
+        value={password}
+        type="password"
+        placeholder="Enter your password" />
         <button
         style={{ backgroundColor: "#6C63FF" }}
         className="w-full p-4 text-white rounded-md" onClick={login}>Login</button>
-        <span className="text-gray-500 w-2/4 flex mt-2">Don&apos;t have an account?<a href="/register" className="text-blue-500">Register</a></span>
+        <span className="text-gray-500 w-2/4 flex mt-2">Don&apos;t have an account?<a href="#" className="text-blue-500">Register</a></span>
       </div>
     </div>
     </div>

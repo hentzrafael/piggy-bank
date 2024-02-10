@@ -1,4 +1,4 @@
-import LoginPage from "@/app/login/LoginPage";
+import LoginPage from "@/app/login/presentation/pages/LoginPage";
 import "@/core/styles/globals.css"
 import Head from "next/head";
 
