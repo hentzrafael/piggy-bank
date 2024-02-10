@@ -19,7 +19,7 @@ export default function HomePage({ data, username }: { data: Account[], username
       <ToastContainer autoClose={1000}/>
       <Image src="/investment.svg" alt="Finance image" width={400} height={300} />
       <hr></hr>
-      <h1 className="text-3xl font-bold mb-4 text-secondary mt-5">Welcome, {username}!</h1>
+      <h1 id="name-text" className="text-3xl font-bold mb-4 text-secondary mt-5">Welcome, {username}!</h1>
       <p>Here, you can control the balance of your accounts and transfer money between them.</p>
       { accounts.length > 0 && <div className="grid grid-cols-2 gap-4 p-4 w-3/4 h-1/6">
         {accounts.map((account, index) => (
@@ -27,6 +27,7 @@ export default function HomePage({ data, username }: { data: Account[], username
         ))}
       </div>}
       {accounts.length > 0  && <button
+        id='transfer-button'
         className='bg-primary hover:bg-secondary transition-colors text-white font-bold py-2 px-4 rounded'
         onClick={() => setModalIsOpen(true)}>
         Transfer</button>}

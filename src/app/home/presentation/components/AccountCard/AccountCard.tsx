@@ -1,7 +1,6 @@
 import { Account } from "@/app/home/domain/account";
 import { useState } from "react";
 import { NumberInputModal } from "../NumberInputModal/NumberInputModal";
-import { MdAdd } from "react-icons/md";
 
 
 export function AccountCard(props: Account) {
@@ -14,9 +13,9 @@ export function AccountCard(props: Account) {
 
   return (
     <div key={props.id} className="bg-white rounded-lg shadow-lg p-4 flex-col ">
-      <h2 className="text-xl font-bold mb-2 text-primary text-center">{props.name} Account</h2>
+      <h2 className="text-xl font-bold mb-2 text-primary text-center" id="name-text">{props.name} Account</h2>
       <hr />
-      <p className={`text-lg font-bold p-4 text-center ${balanceColor}`}>Balance: ${props.balance}</p>
+      <p className={`text-lg font-bold p-4 text-center ${balanceColor}`} id="balance-text">Balance: ${props.balance}</p>
       <div className="flex justify-center p-4"/>
       <div className='grid grid-cols-2 gap-3'>
         <button

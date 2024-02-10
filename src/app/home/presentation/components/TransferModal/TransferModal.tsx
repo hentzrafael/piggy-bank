@@ -19,7 +19,7 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
             setDestination(accounts[1].id);
         };
         loadOptions();
-    });
+    },[username]);
 
     const handleInputChange = (e: any) => {
         setValue(parseFloat(e.target.value));
@@ -51,6 +51,7 @@ export function TransferModal({ onClose, username }: { onClose: (value: number) 
             <div className="bg-white p-8 rounded-lg">
                 <h1 className="text-lg font-bold mb-4 text-black">Amount to transfer:</h1>
                 <input
+                    placeholder="Enter amount"
                     type="number"
                     value={value}
                     onChange={handleInputChange}

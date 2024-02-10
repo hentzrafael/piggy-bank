@@ -45,7 +45,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     } catch (err) {
         return NextResponse.json({
             statusCode: 500,
-            message: "Erro ao criar contas",
+            message: "Error transfering values",
         })
     }
 };
