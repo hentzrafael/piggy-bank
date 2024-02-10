@@ -26,7 +26,6 @@ const InitialAccountModal = () => {
 
   return (
     <div>
-       <button onClick={openModal}>Open Modal</button>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 mt-15">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

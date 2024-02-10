@@ -1,7 +1,7 @@
-import { prisma } from "@/common/prisma";
+import  prisma from "@/common/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const {accountId, amount } = await req.json();
         const account = await prisma.account.update({
