@@ -6,7 +6,7 @@ export async function GET(req:NextRequest, res:NextResponse) {
     if (!username) {
         return NextResponse.json({
             statusCode: 404,
-            message: "Usuário não encontrado",
+            message: "User not found",
         })
     }
     return Response.json(await prisma.user.findUnique({
