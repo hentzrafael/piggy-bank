@@ -46,6 +46,7 @@ export function NumberInputModal({ onClose, type, account }: { onClose: (value: 
                 <div className="bg-white p-8 rounded-lg">
                     <h1 className="text-lg font-bold mb-4 text-black">Value:</h1>
                     <input
+                        id="input-balance"
                         type="number"
                         value={value}
                         onChange={handleInputChange}
@@ -60,6 +61,7 @@ export function NumberInputModal({ onClose, type, account }: { onClose: (value: 
                             Cancel
                         </button>
                         <button
+                            id="ok-button"
                             onClick={handleModalClose}
                             className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary">
                             OK

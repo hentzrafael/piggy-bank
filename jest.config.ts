@@ -25,6 +25,7 @@ const config: Config = {
 
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-node',
   setupFilesAfterEnv: ['<rootDir>/src/common/singleton.ts'],

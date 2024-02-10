@@ -39,7 +39,7 @@ const InitialAccountModal = () => {
                     </h4>
                     <div className="mt-2 flex-col ">
                       <input 
-                      type="text" 
+                      type="number" 
                       placeholder="Savings Account" 
                       className="mt-1 p-2 border rounded-md mb-4" 
                       style={{color: 'black'}}
@@ -49,7 +49,7 @@ const InitialAccountModal = () => {
                       <hr />
                       <h4 className='text-lg leading-6 font-medium text-gray-900 mt-4'>Checkings Balance:</h4>
                       <input 
-                      type="text" 
+                      type="number" 
                       placeholder="Checkings Account" 
                       style={{color: 'black'}}
                       className="mt-1 p-2 border rounded-md" 
