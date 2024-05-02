@@ -1,7 +1,8 @@
-## SCALIS.ai Challenge
+## Piggy Bank
 
-It was really fun to develop this project. The tech challenges were perfect to understand even more concepts of testing and development.
-I would like to thank [SCALIS.ai](https://scalis.ai/) for the opportunity to showcase my work and skills.
+[//]: <> (It was really fun to develop this project. The tech challenges were perfect to understand even more concepts of testing and development.)
+
+[//]: <> (I would like to thank SCALIS.ai https://scalis.ai/ for the opportunity to showcase my work and skills.)
 
 In this document, I explain some features implemented and some decisions taken into account during development.
 
